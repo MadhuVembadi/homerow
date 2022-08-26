@@ -1,0 +1,81 @@
+#icon {
+  color: #d1d0c5;
+  transition: padding 0.5s;
+}
+
+#icon.active,
+#icon:hover {
+  padding-top: 3px;
+  color: #e2b714;
+}
+
+.navbar-brand {
+  font-family: "Lexend Deca", sans-serif;
+  font-size: 2.8vw;
+  font-weight: 600;
+  color: #d1d0c5;
+  position: relative;
+  margin-right: 50px;
+}
+
+.navbar-brand:hover {
+  color: #d1d0c5;
+}
+
+#superscript {
+  font-size: x-small;
+  position: absolute;
+  font-size: 30%;
+  top: 0px;
+  left: 23%;
+}
+
+.navbar-text {
+  color: #999;
+  font-size: 0.8rem;
+}
+
+@media (min-width: 0px) and (max-width: 800px) {
+  .container {
+    position: relative;
+  }
+  .navbar-nav {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 50%;
+    left: 0px;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 500px) {
+  .navbar-brand {
+    font-family: "Lexend Deca", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #d1d0c5;
+    position: relative;
+  }
+}
+
+.navbar-toggler {
+  size: 3px;
+}
+
+#symbol {
+  font-size: 20px;
+}
+
+#spanimg {
+  position: relative;
+}
+
+#typespan {
+  position: relative;
+  left: 25%;
+}
+#image {
+  position: absolute;
+  left: -25%;
+  width:100%;
+}

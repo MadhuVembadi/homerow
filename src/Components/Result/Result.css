@@ -1,0 +1,58 @@
+#wpm-acc h3 {
+    font-size: 3vw;
+  }
+  
+  #wordspermin,
+  #accuracy {
+    font-size: 5vw;
+    font-weight: 500;
+    color: #e2b714;
+    font-family: "Vazirmatn";
+  }
+  
+  @media (min-width: 0px) and (max-width: 400px) {
+    #wordspermin,
+    #accuracy {
+      font-size: 21.4px;
+      font-weight: 500;
+      color: #e2b714;
+      font-family: "Vazirmatn";
+    }
+  
+    #wpm-acc h3 {
+      font-size: 12.84px;
+    }
+  }
+  
+  #hover-indicator {
+    background-color: black;
+    opacity: 0.5;
+    outline: none;
+    border: none;
+  }
+  
+  #net-indicator,
+  #raw-indicator {
+    width: 15px;
+    height: 15px;
+    outline: none;
+    border-radius: 2px;
+  }
+  
+  #net-indicator {
+    background-color: #e2b714;
+  }
+  
+  #raw-indicator {
+    background-color: #fff;
+  }
+  
+  #inner {
+    color: white;
+  }
+  
+  #characters > span {
+    font-size: 30px;
+    color: #e2b714;
+  }
+  

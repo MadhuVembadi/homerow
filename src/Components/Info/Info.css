@@ -1,0 +1,54 @@
+#about ul {
+  list-style-type: none;
+  padding: 0;
+  color: #d1d0c5;
+}
+
+#about {
+  font-family: "Roboto Mono", "Roboto Mono", "Vazirmatn";
+  font-weight: 600;
+}
+
+.col {
+  background-color: black;
+  width: 180px;
+  height: 70px;
+  top: 30%;
+  color: #d1d0c5;
+  border-radius: 10px;
+}
+
+a {
+  color: #d1d0c5;
+}
+
+.col:hover {
+  background-color: #d1d0c5;
+  color: black;
+}
+.col:hover a {
+  color: black;
+}
+
+span a {
+  position: relative;
+  top: 30%;
+}
+
+#praying {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  font-size: large;
+  color: #d1d0c5;
+  margin: 0px 5px;
+}
+
+#monkeytype-website {
+  text-decoration: none;
+  color: #d1d0c5;
+}
+
+#monkeytype-website:hover {
+  text-decoration: none;
+  color: #d1d0c5;
+}
