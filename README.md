@@ -2,6 +2,18 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### Test Page
+![test page](https://github.com/MadhuVembadi/homerow/blob/master/Screenshots/Test%20page.png?raw=true)
+
+### Result Page
+![result page](https://github.com/MadhuVembadi/homerow/blob/master/Screenshots/Result%20page.png?raw=true)
+
+### Profile Page
+![result page](https://github.com/MadhuVembadi/homerow/blob/master/Screenshots/Profile%20Page.png?raw=true)
+
+### Settings Page
+![result page](https://github.com/MadhuVembadi/homerow/blob/master/Screenshots/Settings%20Page.png?raw=true)
+
 ## Available Scripts
 
 In the project directory, you can run:
