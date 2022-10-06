@@ -1,12 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Label } from 'recharts'
 import { useSelector } from 'react-redux'
 import './Result.css'
-
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addResult } from '../../Slices/userSlice'
 
 function Result() {
 
     let result = useSelector(state => state.result);
+
+    let {
+        userObj,
+        isError,
+        isSuccess,
+        isLoading,
+        errMsg,
+        isResError,
+        isResSuccess,
+        isResLoading,
+        resErrMsg
+    } = useSelector(state => state.user);
+
+    let { testTime } = useSelector(state => state.manual);
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
 
     const CustomTooltip = ({ active, payload, label }) => {
 
@@ -28,6 +49,49 @@ function Result() {
         return null;
     };
 
+
+    useEffect(() => {
+        if (isSuccess) {
+
+
+            let today = new Date();
+            let months = ["JAN", "FEB", "MAR", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            let date = String(today.getDate()).padStart(2, '0') + " ";
+            let mon = String(months[today.getMonth()]) + " ";
+            let year = String(today.getFullYear());
+            let hours = String(today.getHours()).padStart(2, '0');
+            let minutes = String(today.getMinutes()).padStart(2, '0');
+            let seconds = String(today.getSeconds()).padStart(2, '0');
+
+            let dateStamp = (date + mon + year);
+
+            let timeStamp = (hours + ":" + minutes + ":" + seconds);
+
+            let curr = { wpm: result[0].wpm, accuracy: result[0].accuracy, characters: result[0].correct + "/" + result[0].incorrect + "/" + result[0].missed + "/" + result[0].extra, mode: "time " + String(testTime), date: dateStamp, time: timeStamp, testTime: testTime }
+
+            let actionObj = addResult({ username: userObj.username, result: curr });
+
+            dispatch(actionObj);
+
+            // axios.put('http://localhost:5000/result/add', { username: userObj.username, result: curr })
+            //     .then(response => {
+            //         console.log("test saved");
+            //         //alert(response.data.message);
+            //     })
+            //     .catch(error => {
+            //         //alert(error);
+            //         console.log("error")
+            //     })
+
+
+        }
+
+        if (isResError) {
+            alert(resErrMsg);
+        }
+
+    }, [])
     return (
         <div>
             <>

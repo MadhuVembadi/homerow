@@ -7,12 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import Result from '../Result/Result';
 import { useSelector, useDispatch } from 'react-redux';
 import { currResult } from '../../Slices/resultSlice';
+import { addListener } from '@reduxjs/toolkit';
 
 function Test() {
 
     let [words, setWords] = useState([]);
     let [text, setText] = useState('');
-    let [timer, setTimer] = useState(30);
+    let [timer, setTimer] = useState(0);
     let [isRunning, setRunning] = useState(false);
     let [isFinished, setFinished] = useState(false);
     let [typed, setTyped] = useState(0);
@@ -28,6 +29,9 @@ function Test() {
 
     let result = useSelector(state => state.result);
 
+    let { userObj, isError, isSuccess, errMsg, isLoading } = useSelector(state => state.user);
+
+    let { testTime } = useSelector(state => state.manual);
 
     var grossArr = [];
     var netArr = [];
@@ -92,7 +96,7 @@ function Test() {
             item.className = item.className.replace(/\s/g, "")
         })
 
-        document.querySelector("#cursor").style.top = '224px';
+        document.querySelector("#cursor").style.top = '218px';
         document.querySelector("#cursor").style.left = '41px';
         document.querySelector("#words").style.margin = '10px 20px';
 
@@ -102,7 +106,7 @@ function Test() {
         }
 
         //intitialising timers and all others if refresh is hit
-        setTimer(30);
+        setTimer(testTime);
         setRunning(false);
         setGrossWPM(0);
         setTyped(0);
@@ -136,12 +140,12 @@ function Test() {
         let msPassed = (current - e);
         let sPassed = Math.round(msPassed / 1000);
 
-        return 30 - sPassed;
+        return testTime - sPassed;
     }
     const startTimer = (e) => {
         let t = getRemainingTime(e);
 
-        let time = ((30 - t) / 60);
+        let time = ((testTime - t) / 60);
         let wordsTyped = tyRef.current + 1;
         let gwpm = Math.round((wordsTyped / 5) / time);
         let crctChar = document.querySelectorAll("#word.correct #letter").length;
@@ -151,8 +155,8 @@ function Test() {
         let l = document.querySelectorAll("#letter.correct").length;
         let acc = Math.floor((l / wordsTyped) * 100);
 
-        grossArr.push({ sec: 30 - t - 1, gwpm: gwpm });
-        netArr.push({ sec: 30 - t - 1, net: net });
+        grossArr.push({ sec: testTime - t - 1, gwpm: gwpm });
+        netArr.push({ sec: testTime - t - 1, net: net });
 
         setGrossWPM(gwpm);
         setNetWPM(net);
@@ -173,7 +177,7 @@ function Test() {
     }
 
     const clearTimer = (e) => {
-        setTimer(30);
+        setTimer(testTime);
 
         if (Ref.current) {
             clearInterval(Ref.current);
@@ -194,6 +198,12 @@ function Test() {
     //useEffects
     useEffect(() => {
         getWords();
+        setTimer(testTime);
+
+        let curr = document.querySelector(".settings-nav-link").className;
+
+        document.querySelector(".settings-nav-link").className = curr.replaceAll("active", "");
+
     }, [])
 
     useEffect(() => {
@@ -361,6 +371,7 @@ function Test() {
         let missed = document.querySelectorAll(".missed").length;
 
         let actionObj = currResult({ wpm: netRef.current, accuracy: acc, graphData: arr, correct: correct, incorrect: incorrect, extra: extra, missed: missed });
+        console.log(actionObj);
         dispatch(actionObj);
 
         setFinished(true);

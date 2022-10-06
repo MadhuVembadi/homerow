@@ -1,0 +1,9 @@
+#user .nav-link.active {
+  color: #e2b714;
+}
+
+#user .nav-link {
+  color: #d1d0c5;
+  font-family: "Roboto Mono", "Roboto Mono", "Vazirmatn";
+  font-weight: 600;
+}

@@ -1,0 +1,59 @@
+#logintosignup {
+  color: #d1d0c5;
+}
+a:hover {
+  color: #e2b714;
+}
+
+#popup span {
+  font-size: smaller;
+}
+
+#user {
+  position: relative;
+}
+
+#popup {
+  width: 25%;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: "Roboto Mono", "Roboto Mono", "Vazirmatn";
+  font-weight: 600;
+  position: absolute;
+  top: 0px;
+  animation-name: notification;
+  animation-duration: 4s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  visibility: hidden;
+}
+
+#popup.success {
+  background-color: #e2b714;
+}
+#popup.failure {
+  background-color: red;
+}
+@keyframes notification {
+  0% {
+    visibility: visible;
+    right: calc(-1 * 25% / 1);
+  }
+  25% {
+    visibility: visible;
+    right: 0px;
+  }
+  75% {
+    visibility: visible;
+    right: 0px;
+  }
+  100% {
+    visibility: visible;
+    right: calc(-1 * 25% / 1);
+  }
+}
+
+#popup p {
+  color: white;
+  opacity: 1;
+}

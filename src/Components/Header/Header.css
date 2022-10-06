@@ -77,5 +77,18 @@
 #image {
   position: absolute;
   left: -25%;
-  width:100%;
+  width: 100%;
+}
+
+#signout.btn {
+  color: #d1d0c5;
+  position: absolute;
+  right: 10px;
+  outline: none;
+  border: none;
+}
+
+#signout.btn:hover {
+  outline: none;
+  border: none;
 }

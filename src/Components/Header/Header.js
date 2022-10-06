@@ -1,29 +1,42 @@
 import React from 'react'
-import { Navbar, Container, Nav, } from 'react-bootstrap'
+import { Navbar, Container, Nav, Button } from 'react-bootstrap'
 import { BsFillKeyboardFill, BsKeyboardFill } from 'react-icons/bs'
-import { Routes, Route, NavLink } from 'react-router-dom'
+import { Routes, Route, NavLink, Navigate } from 'react-router-dom'
 import Test from '../Test/Test'
-import Leaderboard from '../Leaderboard/Leaderboard'
 import Info from '../Info/Info'
-import Settings from '../Manual/Manual'
-import User from '../User/User'
+import Home from '../User/Home/Home'
+import Login from '../User/Login/Login'
+import Signup from '../User/Signup/Signup'
 import Manual from '../Manual/Manual'
 import Result from '../Result/Result'
+import Dashboard from '../User/Dashboard/Dashboard'
 import { faRankingStar, faInfo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IoSettings, IoInformationOutline } from 'react-icons/io5'
+import { FaSignOutAlt } from 'react-icons/fa'
 import { FiUser } from 'react-icons/fi'
 import { GiPodium } from 'react-icons/gi'
 import { MdLeaderboard } from 'react-icons/md'
 import './Header.css'
-import { $CombinedState } from '@reduxjs/toolkit'
 import monketImg from '../../Images/monkey.png'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { clearLoginStatus } from '../../Slices/userSlice'
 
 
 
 function Header() {
 
+    let { userObj, isError, isSuccess, errMsg, isLoading } = useSelector(state => state.user);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const userLogout = () => {
+        localStorage.clear();
+        dispatch(clearLoginStatus())
+        navigate('/user/login')
+    }
 
     return (
         <div className='header'>
@@ -47,33 +60,42 @@ function Header() {
                             </Nav.Link>
                         </Nav.Item>
 
-                        <Nav.Item className="m-2">
-                            <Nav.Link eventKey="2" as={NavLink} to="/leaderboard" id="icon">
-                                <MdLeaderboard id="symbol" />
-                            </Nav.Link>
-                        </Nav.Item>
 
                         <Nav.Item className="m-2">
-                            <Nav.Link eventKey="3" as={NavLink} to="/info" id="icon">
+                            <Nav.Link eventKey="2" as={NavLink} to="/info" id="icon">
                                 <IoInformationOutline id="symbol" />
                             </Nav.Link>
                         </Nav.Item>
 
                         <Nav.Item className="m-2">
-                            <Nav.Link eventKey="4" as={NavLink} to="/settings" id="icon">
+                            <Nav.Link eventKey="3" as={NavLink} to="/settings" id="icon" className='settings-nav-link'>
                                 <IoSettings id="symbol" />
                             </Nav.Link>
                         </Nav.Item>
 
                         <Nav.Item className="m-2">
-                            <Nav.Link eventKey="5" as={NavLink} to="/user" id="icon">
-                                <FiUser id="symbol" />
+                            <Nav.Link eventKey="4" as={NavLink} to="/user" id="icon">
+                                <FiUser id="symbol" className='me-2' />
+                                {
+                                    isSuccess &&
+                                    <span className='mb-0 pb-0'>
+                                        {userObj.username}
+                                    </span>
+                                }
                             </Nav.Link>
                         </Nav.Item>
 
+
+                        {/* {
+                            isSuccess &&
+                            <Button onClick={userLogout}>
+                                Sign out
+                            </Button>
+                        } */}
+
                     </Nav>
 
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    {/* <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav" className='w-100 justify-content-end'>
 
                         <Navbar.Text className='justify-content-end'>
@@ -90,20 +112,31 @@ function Header() {
                             </ul>
                         </Navbar.Text>
 
-                    </Navbar.Collapse>
+                    </Navbar.Collapse> */}
 
                 </Container>
+                {
+                    isSuccess &&
+                    <Button variant="none" onClick={userLogout} id="signout">
+                        <FaSignOutAlt className='me-2' />Sign out
+                    </Button>
+                }
+
             </Navbar>
+
 
             <Routes>
                 <Route path="/" element={<Test />} />
                 <Route path="/test" element={<Test />} />
-                <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/info" element={<Info />} />
                 <Route path="/settings" element={<Manual />} />
-                <Route path="/user" element={<User />} />
+                <Route path="/user/:username" element={<Dashboard />} />
+                <Route path="/user" element={<Home />} >
+                    <Route path="" element={<Navigate replace to="login" />} />
+                    <Route path="login" element={<Login />} />
+                    <Route path="signup" element={<Signup />} />
+                </Route>
                 <Route path='/result' element={<Result />} />
-
             </Routes>
 
         </div >

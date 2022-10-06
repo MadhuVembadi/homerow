@@ -1,0 +1,49 @@
+#dynamic-island {
+  position: relative;
+  width: 0%;
+  background-color: #d1d0c5;
+  border-radius: 20px;
+  position: absolute;
+  border: 2px solid #e2b714;
+  animation-name: dropinNotification;
+  animation-duration: 4s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  visibility: hidden;
+  top: 12%;
+}
+
+#dynamic-island p {
+  color: black;
+  font-family: "Roboto Mono", "Roboto Mono", "Vazirmatn";
+  font-weight: 600;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 100%;
+}
+
+@keyframes dropinNotification {
+  0% {
+    visibility: visible;
+    width: 10%;
+  }
+  25% {
+    visibility: visible;
+    width: 25%;
+  }
+  50% {
+    visibility: visible;
+    width: 25%;
+  }
+  75% {
+    visibility: visible;
+    width: 25%;
+  }
+  100% {
+    visibility: hidden;
+    width: 0%;
+  }
+}
+
+
