@@ -12,7 +12,6 @@ import userSlice from '../../../Slices/userSlice'
 import { userLogin } from '../../../Slices/userSlice'
 import { useNavigate } from 'react-router-dom'
 
-
 function User() {
 
     let { register, handleSubmit, formState: { errors } } = useForm();

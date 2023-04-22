@@ -139,7 +139,7 @@ function Header() {
                 <Route path='/result' element={<Result />} />
             </Routes>
 
-        </div >
+        </div>
     )
 }
 
